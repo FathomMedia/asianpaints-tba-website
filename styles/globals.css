@@ -10,6 +10,7 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
+  @apply bg-slate-100;
   /* --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
 
@@ -128,8 +129,9 @@ input {
 }
 
 form > button {
-  background: #ee4927 !important;
+  background-color: #ee4927 !important;
   padding: 0.5rem 1.5rem;
+  @apply disabled:!bg-gray-400;
   line-height: 3rem;
   border-radius: 70px;
   font-weight: 500;
@@ -156,10 +158,18 @@ select {
   border-radius: 10px;
   color: #1b2559;
   line-height: 3rem;
+  text-overflow: ellipsis;
   padding: 1.5rem 1.5rem;
 }
 
 label {
   display: flex;
   flex-direction: column;
+}
+
+.form-container {
+  @apply md:p-20 p-8;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
 }
