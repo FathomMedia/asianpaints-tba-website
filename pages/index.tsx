@@ -26,6 +26,8 @@ export default function Home() {
       time,
       service
     );
+    setNames("");
+    setPhone("");
     setShowMessage(true);
     // console.log(hubspot_response);
     setIsLoading(false);
