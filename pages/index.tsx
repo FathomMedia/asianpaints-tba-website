@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [names, setNames] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
   const [phone, setPhone] = useState("");
   const [time, setTime] = useState("Morning");
   const [service, setService] = useState("Color Consultation");
@@ -25,8 +26,12 @@ export default function Home() {
       time,
       service
     );
-    console.log(hubspot_response);
+    setShowMessage(true);
+    // console.log(hubspot_response);
     setIsLoading(false);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 10000);
   };
   const submit_hubspot_form = async (
     names: any,
@@ -74,7 +79,7 @@ export default function Home() {
       config
     );
     return response;
-    console.log(response);
+    // console.log(response);
   };
   return (
     <>
@@ -103,6 +108,15 @@ export default function Home() {
                 Please enter the details below and you will be contacted at your
                 preferred time.
               </p>
+              <div
+                className={
+                  showMessage
+                    ? "block text-center text-green-500 mt-4  mx-3 border border-green-500 rounded-xl px-8 py-4 border-gradient-to-r from-primary to-primary/80"
+                    : "hidden mx-3"
+                }
+              >
+                <p>Thank you! You will be contacted at your preferred time.</p>
+              </div>
             </div>
             <form onSubmit={handleSubmit} method="POST">
               <label>
@@ -110,6 +124,8 @@ export default function Home() {
 
                 <input
                   type="text"
+                  autoComplete="off"
+                  required
                   placeholder="Your full name"
                   name="names"
                   value={names}
@@ -119,7 +135,9 @@ export default function Home() {
               <label>
                 <h3 className="mb-2">Phone number</h3>
                 <input
-                  type="phone"
+                  autoComplete="off"
+                  type="tel"
+                  required
                   name="phone"
                   placeholder="Mobile Number"
                   value={phone}
