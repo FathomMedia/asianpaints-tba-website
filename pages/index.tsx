@@ -13,8 +13,9 @@ export default function Home() {
   const [showMessage, setShowMessage] = useState(false);
   const [phone, setPhone] = useState("");
   const [time, setTime] = useState("Morning");
-  const [service, setService] = useState("Color Consultation");
+  const [service, setService] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  // console.log(service);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -53,7 +54,6 @@ export default function Home() {
       },
     };
     // console.log(formGuid);
-
     const response = await axios.post(
       `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
       {
@@ -93,7 +93,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div>
-          <div className="flex justify-center py-8">
+          <div className="flex justify-center py-2">
             <Image
               src="/assets/apb_logo.png"
               alt="logo"
@@ -102,7 +102,7 @@ export default function Home() {
             />
           </div>
           <div className="form-container">
-            <div className="mb-12 max-w-xl">
+            <div className="mb-12">
               <h1 className="text-2xl font-bold mb-1">
                 Welcome to Asian Paints Berger
               </h1>
@@ -113,7 +113,7 @@ export default function Home() {
               <div
                 className={
                   showMessage
-                    ? "block text-center text-green-500 mt-4  mx-3 border border-green-500 rounded-xl px-8 py-4 border-gradient-to-r from-primary to-primary/80"
+                    ? "block text-center text-green-500 mt-4 w-full justify-center mx-3 border border-green-500 rounded-xl px-8 py-4 border-gradient-to-r from-primary to-primary/80"
                     : "hidden mx-3"
                 }
               >
@@ -146,7 +146,7 @@ export default function Home() {
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </label>
-              <label>
+              <label className="col-span-full">
                 <h3 className="mb-2">Preferred time to contact</h3>
                 <select
                   name="time"
@@ -159,7 +159,7 @@ export default function Home() {
                   <option value={"Afternoon"}>Afternoon</option>
                 </select>
               </label>
-              <label>
+              {/* <label>
                 <h3 className="mb-2">Service you are interested in</h3>
                 <select
                   name="service"
@@ -173,7 +173,54 @@ export default function Home() {
                     Safe Painting Service (SPS)
                   </option>
                 </select>
-              </label>
+              </label> */}
+              <h3 className="mt-2">Service you are interested in</h3>
+              <div className="flex flex-col w-full py-6 px-4 rounded-lg border col-span-full">
+                <label
+                  htmlFor="cc"
+                  className="flex flex-row  justify-start items-center gap-4"
+                >
+                  <input
+                    type="radio"
+                    name="services"
+                    id="cc"
+                    value={"Color Consultation"}
+                    onChange={(e) => setService(e.target.value)}
+                    // checked="checked"
+                  />
+                  <label htmlFor="cc">
+                    Color Consultation
+                    <p className="mt-2 text-gray-400 font-light text-sm">
+                      Personalized design consultation based on your tastes and
+                      needs.
+                    </p>
+                  </label>
+                </label>
+              </div>
+              <div className="flex flex-col w-full py-6 px-4 rounded-lg border col-span-full">
+                <label className="flex flex-row  justify-start items-center gap-4 ">
+                  <input
+                    onChange={(e) => setService(e.target.value)}
+                    type="radio"
+                    name="services"
+                    value={"Safe Painting Service (SPS)"}
+                    id="sps"
+                  />
+                  <label htmlFor="sps">
+                    Safe Painting Service (SPS){" "}
+                    <p className="mt-2 max-w-2xl text-gray-400 font-light text-sm">
+                      A complete end-to-end safe and hygienic home painting
+                      service where our experts provide consultation about our
+                      products and services.
+                      <ul className="ml-4 mt-2 list-disc">
+                        <li>Hassle-free</li>
+                        <li>Expert painters</li>
+                        <li>Faster delivery</li>
+                      </ul>
+                    </p>
+                  </label>
+                </label>
+              </div>
               <button
                 className="disabled:bg-gray-500 mt-4"
                 type="submit"
