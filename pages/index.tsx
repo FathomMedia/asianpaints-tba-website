@@ -184,6 +184,7 @@ export default function Home() {
                     type="radio"
                     name="services"
                     id="cc"
+                    required
                     value={"Color Consultation"}
                     onChange={(e) => setService(e.target.value)}
                     // checked="checked"
